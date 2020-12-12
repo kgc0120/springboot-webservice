@@ -16,7 +16,7 @@ public class Application {
               System.out.println("Connection created : " + connection);
               String sql = "INSERT INTO ACCOUNT VALUES(1, 'gyucheol', 'pass');";
               try(PreparedStatement statement = connection.prepareStatement(sql)) {
-                  System.out.println("git ssh test commit");
+                  System.out.println("git ssh test commit2");
                   statement.execute();
               }
 
