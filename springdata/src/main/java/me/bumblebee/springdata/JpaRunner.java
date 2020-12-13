@@ -58,8 +58,19 @@ public class JpaRunner implements ApplicationRunner {
 
         Session session = entityManager.unwrap(Session.class);
 //        session.save(post);
-        Post post = session.get(Post.class, 1l);
-        session.delete(post);
+        Post post = session.get(Post.class, 4l);
+//        session.delete(post);
+        System.out.println("===================================");
+        System.out.println(post.getTitle());
+
+//      연관 관계의 엔티티를 어떻게 가져올 것인가 지금(Eager) 나중에(Lazy)
+//      @OneToMany의 기본값은 Lazy
+//      @ManyToOne의 기본값은 Eager
+        post.getComents().forEach( c ->{
+            System.out.println("-----------------------");
+            System.out.println(c.getCommnet());
+        });
+
     }
 
 
