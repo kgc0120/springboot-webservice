@@ -2,6 +2,8 @@ package me.bumblebee.springdata;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 // 특정 db에서는 user라는 테이블을 만들 수가 없다.(postgres)
@@ -19,19 +21,31 @@ public class Account {
 
     private String password;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created = new Date();
+    @OneToMany(mappedBy = "owner")
+    private Set<Study> studies = new HashSet<>();
 
-    private String yes;
 
-    @Transient
-    private String no;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "street", column = @Column(name = "home_street"))
-    })
-    private Address address;
+    public Set<Study> getStudies() {
+        return studies;
+    }
+
+    public void setStudies(Set<Study> studies) {
+        this.studies = studies;
+    }
+    //    @Temporal(TemporalType.TIMESTAMP)
+//    private Date created = new Date();
+//
+//    private String yes;
+//
+//    @Transient
+//    private String no;
+
+//    @Embedded
+//    @AttributeOverrides({
+//            @AttributeOverride(name = "street", column = @Column(name = "home_street"))
+//    })
+//    private Address address;
 
     public Account() {
     }
@@ -59,5 +73,17 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void addStudy(Study study) {
+        // 관계의 주인인 곳에 관계를 맵핑 시켜야 한다.
+        // 지금 여기서 관계의 주인은 study
+        this.getStudies().add(study); // optional 객체지향 측면에서는 해줘야함
+        study.setOwner(this);
+    }
+
+    public void removeStudy(Study study) {
+        this.getStudies().remove(study);
+        study.setOwner(null);
     }
 }
