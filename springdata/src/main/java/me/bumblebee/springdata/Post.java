@@ -45,4 +45,11 @@ public class Post {
     public void setComents(Set<Comment> coments) {
         this.coments = coments;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "title='" + title + '\'' +
+                '}';
+    }
 }
