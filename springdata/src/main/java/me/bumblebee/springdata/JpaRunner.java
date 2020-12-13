@@ -1,6 +1,7 @@
 package me.bumblebee.springdata;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -18,9 +19,18 @@ import java.util.List;
 @Transactional
 public class JpaRunner implements ApplicationRunner {
 
-    @PersistenceContext
-    EntityManager entityManager; // EntityManager 이 class가 jpa 핵심! 이 클래스를 가지고 entity들을 영속화할 수 있다.
+      @Autowired
+      PostRepository postRepository;
+
+
+//    @PersistenceContext
+//    EntityManager entityManager; // EntityManager 이 class가 jpa 핵심! 이 클래스를 가지고 entity들을 영속화할 수 있다.
     //영속화 한다? db에 저장한다라는 뜻
+
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        postRepository.findAll().forEach(System.out::println);
+    }
 
 //    @Override
 //    public void run(ApplicationArguments args) throws Exception {
@@ -78,27 +88,27 @@ public class JpaRunner implements ApplicationRunner {
 //
 //    }
 
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
-//        JPQL (HQL)
-//        TypedQuery<Post> query = entityManager.createQuery("SELECT p FROM Post AS p", Post.class); // JPQL 단점 : Type Safe 하지않다.
-//        List<Post> posts = query.getResultList();
-//        posts.forEach(System.out::println);
-
-//      Criteria
-//        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-//        CriteriaQuery<Post> query = builder.createQuery(Post.class);
-//        Root<Post> root = query.from(Post.class);
-//        query.select(root);
+//    @Override
+//    public void run(ApplicationArguments args) throws Exception {
+////        JPQL (HQL)
+////        TypedQuery<Post> query = entityManager.createQuery("SELECT p FROM Post AS p", Post.class); // JPQL 단점 : Type Safe 하지않다.
+////        List<Post> posts = query.getResultList();
+////        posts.forEach(System.out::println);
 //
-//        List<Post> posts = entityManager.createQuery(query).getResultList();
+////      Criteria
+////        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+////        CriteriaQuery<Post> query = builder.createQuery(Post.class);
+////        Root<Post> root = query.from(Post.class);
+////        query.select(root);
+////
+////        List<Post> posts = entityManager.createQuery(query).getResultList();
+////        posts.forEach(System.out::println);
+//
+////      Native Query
+//        List<Post> posts = entityManager.createNativeQuery("Select * from Post", Post.class).getResultList();
 //        posts.forEach(System.out::println);
-
-//      Native Query
-        List<Post> posts = entityManager.createNativeQuery("Select * from Post", Post.class).getResultList();
-        posts.forEach(System.out::println);
-
-    }
+//
+//    }
 
 
 }
