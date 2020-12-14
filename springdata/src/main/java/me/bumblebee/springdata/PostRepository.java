@@ -1,6 +1,8 @@
 package me.bumblebee.springdata;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,8 @@ import java.util.List;
 
 // 오늘날 spring jpa
 public interface PostRepository extends JpaRepository<Post, Long> {
+
+    Page<Post> findByTitleContains(String title, Pageable pageable);
 
 //    이런식으로 spring jap에 없는 시절 만들어서 사용하였다.
 //    @PersistenceContext // @Autowired 말고 @PersistenceContext 사용 JPA에 있는 애노테이션을 사용하는 거고 Spring Code를 최대한 감출 수 있다.
