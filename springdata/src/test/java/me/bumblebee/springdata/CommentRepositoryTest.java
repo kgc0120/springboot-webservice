@@ -34,7 +34,7 @@ public class CommentRepositoryTest {
 //        assertEquals(Optional.empty(), byId);
 //        Comment comment = byId.orElseThrow(IllegalArgumentException::new);
 
-        commentRepository.save(null);
+//        commentRepository.save(null);
 
     }
 

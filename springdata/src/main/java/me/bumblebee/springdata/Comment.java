@@ -13,6 +13,16 @@ public class Comment {
 
     private String commnet;
 
+    private Integer likeCount;
+
+    public Integer getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
+    }
+
     @ManyToOne
     private Post post;
 
