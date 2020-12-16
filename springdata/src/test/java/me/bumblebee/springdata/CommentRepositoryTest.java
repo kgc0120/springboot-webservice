@@ -19,23 +19,20 @@ public class CommentRepositoryTest {
     @Test
     @DisplayName("Repository 직접 정의해서 사용하기")
     void crud() {
-//        Comment comment = new Comment();
-//        comment.setCommnet("Hello Comment");
-//        commentRepository.save(comment);
-//
-//        List<Comment> all = commentRepository.findAll();
-//        assertEquals(all.size(), 1);
-//
-//        long count = commentRepository.count();
-//        assertEquals(count, 1);
+        this.createComment(100, "spring data jpa");
+        this.createComment(55, "hibernate spring");
 
-//        Optional<Comment> byId = commentRepository.findById(100l);
-//        // 단일 값들은 null이 나올 수 있는데 list는 null이 안나오고 비어있는 list가 나온다.
-//        assertEquals(Optional.empty(), byId);
-//        Comment comment = byId.orElseThrow(IllegalArgumentException::new);
+        List<Comment> comments = commentRepository.findByCommnetContainsIgnoreCaseOrderByLikeCountDesc("Spring");
+        assertEquals(comments.size(), 2);
 
-//        commentRepository.save(null);
 
+    }
+
+    private void createComment(int likeCount, String comment) {
+        Comment newComment = new Comment();
+        newComment.setLikeCount(likeCount);
+        newComment.setCommnet(comment);
+        commentRepository.save(newComment);
     }
 
 

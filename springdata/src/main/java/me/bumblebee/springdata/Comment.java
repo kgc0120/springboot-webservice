@@ -13,15 +13,7 @@ public class Comment {
 
     private String commnet;
 
-    private Integer likeCount;
-
-    public Integer getLikeCount() {
-        return likeCount;
-    }
-
-    public void setLikeCount(Integer likeCount) {
-        this.likeCount = likeCount;
-    }
+    private Integer likeCount = 0;
 
     @ManyToOne
     private Post post;
@@ -32,6 +24,14 @@ public class Comment {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
     }
 
     public String getCommnet() {

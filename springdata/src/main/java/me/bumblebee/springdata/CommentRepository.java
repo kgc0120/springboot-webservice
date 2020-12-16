@@ -13,7 +13,7 @@ public interface CommentRepository extends MyRepository<Comment, Long>{
     // 미리 정의해 둔 쿼리 찾아 사용하기
 //    @Query("SELECT c from Comment AS c")
     // 메소드 이름을 분석해서 쿼리 만들기
-    List<Comment> findByCommnetContains(String keyword);
+    List<Comment> findByCommnetContainsIgnoreCaseOrderByLikeCountDesc(String keyword);
 
     Page<Comment> findByLikeCountGreaterThanAndPost(int likeCount, Post post, Pageable pageable);
 
