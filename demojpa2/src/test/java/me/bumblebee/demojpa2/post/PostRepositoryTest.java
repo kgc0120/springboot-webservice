@@ -3,10 +3,12 @@ package me.bumblebee.demojpa2.post;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
+@Import(PostRepositoryTestConfig.class)
 class PostRepositoryTest {
 
     @Autowired
@@ -20,7 +22,7 @@ class PostRepositoryTest {
 
         assertFalse(postRepository.contains(post)); //객체 상태가 트랜지언트 상태
 
-        postRepository.save(post);
+        postRepository.save(post).publish();
 
         assertTrue(postRepository.contains(post)); // 객체 상태가 펄시스턴트 상태로 변경
 
