@@ -5,6 +5,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+//@NamedQuery(name = "Post.findByTitle", query = "SELECT p FROM Post AS p WHERE p.title = ?1") // jpql
+// 이렇게 사용하면 domain class가 지저분해진다. Repository interface에 query 애노테이션 이용하는 걸 추천
 public class Post {
 
     @Id @GeneratedValue
