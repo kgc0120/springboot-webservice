@@ -4,24 +4,32 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 @DataJpaTest
 class CommentRepositoryTest {
 
     @Autowired
     CommentRepository commentRepository;
 
+    @Autowired
+    PostRepository postRepository;
+
     @Test
     public void getComment() {
-        // 내가 원하는 패칭 전략을 여러개 사용 가능하다.
-        // FETCH : 설정한 엔티티 애트리뷰트는 EAGER 패치 나머지는 LAZY 패치
-        commentRepository.getById(1l);
 
-        System.out.println("=========================");
+        Post post = new Post();
+        post.setTitle("jpa");
+        Post savedPost = postRepository.save(post);
 
-        commentRepository.findById(1l);
+        Comment comment = new Comment();
+        comment.setCommnet("spring data jpa projection");
+        comment.setPost(savedPost);
+        comment.setUp(10);
+        comment.setDown(1);
+        commentRepository.save(comment);
+
+        commentRepository.findByPostId(savedPost.getId(), CommentOnly.class).forEach(c -> {
+            System.out.println("===============");
+            System.out.println(c.getId());
+        });
     }
 }
