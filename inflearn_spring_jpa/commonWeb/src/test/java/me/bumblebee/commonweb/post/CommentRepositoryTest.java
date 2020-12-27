@@ -3,10 +3,11 @@ package me.bumblebee.commonweb.post;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-@DataJpaTest
+@SpringBootTest
 class CommentRepositoryTest {
 
     @Autowired
@@ -37,6 +38,7 @@ class CommentRepositoryTest {
 
     @Test
     void spexs() {
+        // client code는 깔끔하다.
         Page<Comment> page = commentRepository
                 .findAll(CommentSpecs.isBest().or(CommentSpecs.isGood()), PageRequest.of(0, 10));
     }
