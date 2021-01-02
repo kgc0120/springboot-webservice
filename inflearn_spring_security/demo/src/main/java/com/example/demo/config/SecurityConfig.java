@@ -13,7 +13,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()// 어떤 요청들을 어떻게 인가 할지(허용할지)에 대한 설정
-                .mvcMatchers("/", "info").permitAll()
+                .mvcMatchers("/", "info", "account/**").permitAll()
                 .mvcMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated(); //기타 등등의미
 
@@ -22,11 +22,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .httpBasic();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("gyucheol").password("{noop}123").roles("USER").and()
-                // DB에 들어간 값이라고 생각하면 된다 {noop}123 {noop} prefix는 암호화를 안했다는 prefix
-                .withUser("admin").password("{noop}!@#").roles("ADMIN");
-    }
+//    @Override
+//    in memory authentication
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("gyucheol").password("{noop}123").roles("USER").and()
+//                // DB에 들어간 값이라고 생각하면 된다 {noop}123 {noop} prefix는 암호화를 안했다는 prefix
+//                .withUser("admin").password("{noop}!@#").roles("ADMIN");
+//    }
 }
