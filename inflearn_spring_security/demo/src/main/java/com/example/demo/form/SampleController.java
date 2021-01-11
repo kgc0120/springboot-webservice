@@ -2,12 +2,15 @@ package com.example.demo.form;
 
 import com.example.demo.account.AccountContext;
 import com.example.demo.account.AccountRepository;
+import com.example.demo.common.SecurityLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
+import java.util.concurrent.Callable;
 
 @Controller
 public class SampleController {
@@ -51,6 +54,25 @@ public class SampleController {
     public String user(Model model, Principal principal) {
         model.addAttribute("message", "Hello user, " + principal.getName());
         return "user";
+    }
+
+    @GetMapping("/async-handler")
+    @ResponseBody
+    public Callable<String> asyncHandler() {
+        SecurityLogger.log("MVC");
+        return () -> {
+            SecurityLogger.log("Callable");
+            return "Async Handler";
+        };
+    }
+
+    @GetMapping("async-service")
+    @ResponseBody
+    public String asyncService() {
+        SecurityLogger.log("MVC, before async service");
+        simpleService.asyncService();
+        SecurityLogger.log("MVC, after async service");
+        return "Async Service";
     }
 
 }
