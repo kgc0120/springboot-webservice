@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()// 어떤 요청들을 어떻게 인가 할지(허용할지)에 대한 설정
-                .mvcMatchers("/", "info", "account/**").permitAll()
+                .mvcMatchers("/", "info", "account/**", "/signup").permitAll()
                 .mvcMatchers("/admin").hasRole("ADMIN")
                 .mvcMatchers("/user").hasRole("USER")
                 .anyRequest().authenticated() //기타 등등의미
