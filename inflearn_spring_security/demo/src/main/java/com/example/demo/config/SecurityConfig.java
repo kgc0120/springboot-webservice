@@ -58,6 +58,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and() // 메소드 체이닝 사용 안해도 상관없음
             .httpBasic();
 
+        http.logout().logoutSuccessUrl("/")
+        ;
+
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
     }
 
