@@ -55,6 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDecisionManager(accessDecisionManager());
 
         http.formLogin()
+                .loginPage("/login")
+                .permitAll()
                 .and() // 메소드 체이닝 사용 안해도 상관없음
             .httpBasic();
 
