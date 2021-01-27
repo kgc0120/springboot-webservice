@@ -4,6 +4,8 @@ import com.example.demo.account.Account;
 import com.example.demo.account.AccountContext;
 import com.example.demo.common.SecurityLogger;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,7 +17,8 @@ import java.util.Collection;
 @Service
 public class SimpleService {
 
-
+    @Secured("ROLE_USER")
+    @PreAuthorize("hasRole('USER')")
     public void dashboard() {
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        Object principal = authentication.getPrincipal(); //principal -> userDetail 사용자 정보 담겨져있다.
