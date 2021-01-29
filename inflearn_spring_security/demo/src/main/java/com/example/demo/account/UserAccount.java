@@ -13,4 +13,8 @@ public class UserAccount extends User {
         super(account.getUsername(), account.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_" + account.getRole())));
         this.account = account;
     }
+
+    public Account getAccount() {
+        return account;
+    }
 }

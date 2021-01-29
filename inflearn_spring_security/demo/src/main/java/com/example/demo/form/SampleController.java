@@ -4,6 +4,7 @@ import com.example.demo.account.Account;
 import com.example.demo.account.AccountContext;
 import com.example.demo.account.AccountRepository;
 import com.example.demo.account.UserAccount;
+import com.example.demo.book.BookRepository;
 import com.example.demo.common.CurrentUser;
 import com.example.demo.common.SecurityLogger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class SampleController {
 
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    BookRepository bookRepository;
 
     @GetMapping("/")
     public String index(Model model, @CurrentUser Account account) {
@@ -57,6 +61,7 @@ public class SampleController {
     @GetMapping("/user")
     public String user(Model model, Principal principal) {
         model.addAttribute("message", "Hello user, " + principal.getName());
+        model.addAttribute("books", bookRepository.findCurrentUserBooks());
         return "user";
     }
 
