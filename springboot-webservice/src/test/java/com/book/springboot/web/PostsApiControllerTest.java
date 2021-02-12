@@ -18,7 +18,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PostsApiControllerTest {
@@ -51,11 +50,11 @@ public class PostsApiControllerTest {
         String url = "http://localhost:" + port + "/api/v1/posts";
 
         // when
-        ResponseEntity<Long> longResponseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
+        ResponseEntity<Object> longResponseEntity = restTemplate.postForEntity(url, requestDto, Object.class);
 
         // then
         assertThat(longResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(longResponseEntity.getBody()).isGreaterThan(0L);
+        assertThat(longResponseEntity.getBody());
 
         List<Posts> all = postsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(titile);
