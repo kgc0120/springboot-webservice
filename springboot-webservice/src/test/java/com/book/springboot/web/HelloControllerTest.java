@@ -21,7 +21,7 @@ public class HelloControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private PostsService postsService;
+    private PostsService postsService; // service 사용하는 부분이 없는데 왜 빈 주입을 해줘야지 에러가 안 발생하는지 이해 안감
 
     @Test
     public void  hello() throws Exception {

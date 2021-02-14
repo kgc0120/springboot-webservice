@@ -1,0 +1,9 @@
+me\bumblebee\demojpa2\Demojpa2Application.class
+me\bumblebee\demojpa2\post\PostCustomRepository.class
+me\bumblebee\demojpa2\post\PostPublishedEvent.class
+me\bumblebee\demojpa2\post\PostCustomRepositoryDefault.class
+me\bumblebee\demojpa2\MyRepository.class
+me\bumblebee\demojpa2\post\PostRepository.class
+me\bumblebee\demojpa2\SimplMyRepository.class
+me\bumblebee\demojpa2\post\QPost.class
+me\bumblebee\demojpa2\post\Post.class
